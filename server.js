@@ -23,8 +23,8 @@ const ApiCaller = new Clarifai.App({
 
 app.get('/', (req, res) => {res.send('Working?')});
 
-//app.post('./register', (req, res) => {register.handleregister(req, res, dbServe, bcrypt)})
-app.post('./register', register.handleRegister(dbServe, bcrypt))
+//app.post('/register', (req, res) => {register.handleregister(req, res, dbServe, bcrypt)})
+app.post('/register', register.handleRegister(dbServe, bcrypt))
 
 app.post('/login', (req, res) => {
     dbServe.select('email', 'hash')
