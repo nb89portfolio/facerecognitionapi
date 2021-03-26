@@ -9,22 +9,24 @@ const Clarifai = require('clarifai');
 app.use(express.json());
 app.use(cors());
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+
 const dbServe = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        password: '262560',
-        database: 'facerec'
+        connectionString: process.env.DATABASE_URL,
+        ssl: true
     }
 });
 
 const ApiCaller = new Clarifai.App({
-    apiKey: '79d9196056e24c35a8bee192e245acf6'
+    apiKey: process.env.API_CLARIFAI
 });
 
-//app.post('./register', (req, res) => {register.handleregister(req, res, dbServe, bcrypt)})
-app.post('./register', register.handleRegister(dbServe, bcrypt))
+app.get('/', (req, res) => {res.send('Working?')});
+
+//app.post('/register', (req, res) => {register.handleregister(req, res, dbServe, bcrypt)})
+app.post('/register', register.handleRegister(dbServe, bcrypt))
 
 app.post('/login', (req, res) => {
     dbServe.select('email', 'hash')
