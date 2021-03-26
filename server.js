@@ -23,6 +23,8 @@ const ApiCaller = new Clarifai.App({
     apiKey: '79d9196056e24c35a8bee192e245acf6'
 });
 
+app.get('/', (req, res) => {res.send('Working?')});
+
 //app.post('./register', (req, res) => {register.handleregister(req, res, dbServe, bcrypt)})
 app.post('./register', register.handleRegister(dbServe, bcrypt))
 
