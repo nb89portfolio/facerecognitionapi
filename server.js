@@ -20,7 +20,7 @@ const dbServe = knex({
 });
 
 const ApiCaller = new Clarifai.App({
-    apiKey: '79d9196056e24c35a8bee192e245acf6'
+    apiKey: process.env.API_CLARIFAI
 });
 
 app.get('/', (req, res) => {res.send('Working?')});
